@@ -125,18 +125,6 @@ async function run() {
       // product details
     });
 
-    // app.get("/products/:id", async (req, res) => {
-    //   const id = req.params.id;
-    //   console.log(id);
-    //   const query = { _id: new ObjectId(id) };
-    //   // console.log("query" + query);
-    //   // const result = await productCollection.findOne(query);
-    //   const result = await productCollection.findOne(query);
-    //   console.log(result);
-    //   res.send(result);
-    //   // product update
-    // });
-
     app.post("/products", async (req, res) => {
       const newProducts = req.body;
       console.log(newProducts);
