@@ -10,8 +10,6 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// fashionServer
-// H1BjgpL5Hbnp41Ph
 console.log(process.env.DB_USER);
 console.log(process.env.DB_PASS);
 
@@ -81,6 +79,47 @@ async function run() {
       // console.log("query" + query);
       // const result = await productCollection.findOne(query);
       const result = await productCollection.findOne(query);
+      console.log(result);
+      res.send(result);
+      // product details
+    });
+
+    app.delete("/cart/:id", async (req, res) => {
+      const id = req.params.id;
+      console.log(id);
+      const query = { _id: new ObjectId(id) };
+      // console.log("query" + query);
+      // const result = await productCollection.findOne(query);
+      const result = await addCartCollection.deleteOne(query);
+      console.log(result);
+      res.send(result);
+      // product details
+    });
+
+    app.put("/products/:id", async (req, res) => {
+      const id = req.params.id;
+      console.log(id);
+      const filter = { _id: new ObjectId(id) };
+      const options = { upset: true };
+      const updatedProduct = req.body;
+      const product = {
+        $set: {
+          photo: updatedProduct.photo,
+          brand: updatedProduct.brand,
+          name: updatedProduct.name,
+          price: updatedProduct.price,
+          type: updatedProduct.type,
+          description: updatedProduct.description,
+          rating: updatedProduct.rating,
+        },
+      };
+      // console.log("query" + query);
+      // const result = await productCollection.findOne(query);
+      const result = await productCollection.updateOne(
+        filter,
+        product,
+        options
+      );
       console.log(result);
       res.send(result);
       // product details
