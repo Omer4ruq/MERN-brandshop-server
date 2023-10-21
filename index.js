@@ -47,11 +47,6 @@ async function run() {
       res.send(result);
     });
 
-    // app.get("/products", async (req, res) => {
-    //   const cursor = productCollection.find();
-    //   const result = await cursor.toArray();
-    //   res.send(result);
-    // });
     app.get("/products_by_brand/:brand", async (req, res) => {
       const brand = req.params.brand;
       console.log(brand);
